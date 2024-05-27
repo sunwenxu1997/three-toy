@@ -1,9 +1,15 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import { useRouter, RouterLink } from "vue-router";
+const routes = window.WORKS_ROUTES;
+console.log(routes);
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <ul>
+      <li v-for="(r, i) in routes" :key="i">
+        <RouterLink :to="r.path">{{ r.name }}</RouterLink>
+      </li>
+    </ul>
   </main>
 </template>
