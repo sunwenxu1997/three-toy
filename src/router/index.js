@@ -27,6 +27,7 @@ for (const path in routeFiles) {
     routes.push(element)
   }
 }
+window.WORKS_ROUTES = routes
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
