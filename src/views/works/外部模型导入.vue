@@ -15,13 +15,14 @@ const sizes = {
   height: window.innerHeight
 }
 onMounted(() => {
+  console.log(import.meta.env.BASE_URL);
   init()
 })
 // 初始化场景方法
 function init() {
   // 加载模型
   const loader = new GLTFLoader()
-  loader.load('/gltf/eric_tripod_table_lamp_white.glb', (gltf) => {
+  loader.load(import.meta.env.BASE_URL + 'gltf/eric_tripod_table_lamp_white.glb', (gltf) => {
     const model = gltf.scene
     const box = new THREE.Box3().setFromObject(model) // 创建一个Box3并将其设置为模型的边界
     const center = box.getCenter(new THREE.Vector3()) // 计算模型的中心点
