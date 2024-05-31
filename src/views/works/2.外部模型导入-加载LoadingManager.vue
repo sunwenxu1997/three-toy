@@ -38,17 +38,20 @@ onMounted(() => {
   const loader = new GLTFLoader(loadingManager)
   loader.load(import.meta.env.BASE_URL + 'gltf/war_thunder_merkava_mk.1__high-quality_model.glb', (gltf) => {
     const model = gltf.scene
+    // 给模型设置光滑材质 MeshPhongMaterial
+    model.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        child.material = new THREE.MeshPhongMaterial({ shininess: 10 })
+      }
+    })
     const box = new THREE.Box3().setFromObject(model) // 创建一个Box3并将其设置为模型的边界
     const center = box.getCenter(new THREE.Vector3()) // 计算模型的中心点
     model.position.sub(center) // 将模型的位置设置为其中心点的负值，这将使模型居中
     scene.add(model)
   })
-  // 环境光
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1)
-  scene.add(ambientLight)
   // 直射光
   const directionLight = new THREE.DirectionalLight(0xffffff, 1)
-  directionLight.position.set(100, 100, 100)
+  directionLight.position.set(300, 300, 300)
   scene.add(directionLight)
   // 初始化相机
   const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 1000)
