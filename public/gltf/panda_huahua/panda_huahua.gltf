@@ -80,12 +80,7 @@
       "primitives": [
         {
           "attributes": {
-            "POSITION":{
-              "accessors":{
-                "max": [1.0, 1.0, 1.0],
-                "min": [-1.0, -1.0, -1.0],
-              }
-            },
+            "POSITION": 1,
             "TEXCOORD_0": 2
           },
           "indices": 0,

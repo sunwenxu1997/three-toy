@@ -1,14 +1,17 @@
-import { createRouter, createWebHashHistory  } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 // 检索文件目录 import.meta.glob
-const routeFiles = import.meta.glob('../views/works/**/*.vue', { eager: true })
+const worksFiles = import.meta.glob('../views/works/**/*.vue', { eager: true })
+const exampleFiles = import.meta.glob('../views/examples/**/*.vue', { eager: true })
+const routeFiles = { ...worksFiles, ...exampleFiles }
+console.log(routeFiles);
 const routes = []
 for (const path in routeFiles) {
   if (Object.hasOwnProperty.call(routeFiles, path)) {
     const routeConfig = routeFiles[path].default
-    const routerPath = path.replace(/.vue*$/g, '').split('../views/works')[1]
-    const routerName = routerPath.split('/').reverse()[0]
+    let routerPath = path.replace(/.vue*$/g, '').split('../views')[1]
+    const routerName = routerPath.split('/').pop()
     const element = {
       path: encodeURI(routerPath), //处理中文路径乱码问题
       name: routerName,
